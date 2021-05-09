@@ -31,6 +31,9 @@ Style/FormatString:
 Style/ModuleFunction:
   Enabled: false
 
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
 AllCops:
   Exclude:
     - "bin/*"
