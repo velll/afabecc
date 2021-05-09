@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("POSTGRES_USERNAME") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
+  host: <%= ENV.fetch("POSTGRES_HOST") %>
+
+development:
+  <<: *default
+  database: afabecc_development
+  
+test:
+  <<: *default
+  database: afabecc_test
+
+production:
+  <<: *default
+  database: afabecc_production
+  username: afabecc
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
