@@ -1,9 +1,6 @@
 Bundler/OrderedGems:
   Enabled: false
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 Style/MutableConstant:
   Enabled: false
 
@@ -42,3 +39,6 @@ AllCops:
     - "spec/spec_helper.rb"
     - "Gemfile"
     - "Rakefile"
+    - "db/schema.rb"
+  SuggestExtensions: false
+  NewCops: disable
