@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CreateEndpoint do
-  let(:verb) { 'do' }
+  let(:verb) { 'GET' }
   let(:path) { 'something?cool=true' }
 
   let(:response_attrs) do

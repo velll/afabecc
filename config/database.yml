@@ -17,5 +17,3 @@ test:
 production:
   <<: *default
   database: afabecc_production
-  username: afabecc
-  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
