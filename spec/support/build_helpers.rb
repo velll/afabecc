@@ -3,8 +3,8 @@ module BuildHelpers
     hash.to_json
   end
 
-  def build_endpoint_response(code: 200, body: build_endpoint_response_body)
-    EndpointResponse.new(code: code, headers: {}, body: body)
+  def build_endpoint_response(code: 200, headers: {}, body: build_endpoint_response_body)
+    EndpointResponse.new(code: code, headers: headers, body: body)
   end
 
   def build_endpoint(verb: 'GET', path: 'whatever', response: build_endpoint_response)

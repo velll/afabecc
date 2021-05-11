@@ -17,7 +17,9 @@ class EndpointsController < ApplicationController
     endpoint = CreateEndpoint.call(verb: create_params[:verb],
                                    path: create_params[:path],
                                    response: create_params[:response])
+
     if endpoint.valid?
+      headers['Location'] = "#{root_url}/#{endpoint.path}"
       render json: { data: EndpointSerializer.encode(endpoint) }, status: :created
     else
       render json: { errors: endpoint.errors }, status: :unprocessable_entity

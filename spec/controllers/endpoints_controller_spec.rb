@@ -62,6 +62,13 @@ RSpec.describe EndpointsController do
       expect(new_endpoint.response.body).to eq(example_endpoint.response.body)
     end
 
+    it 'includes a link to a new endpoint in the location header' do
+      post :create, params: { data: create_params }
+
+      new_endpoint = Endpoint.find(JSON.parse(response.body)['data']['id'])
+      expect(response.headers['Location']).to eq("#{root_url}/#{new_endpoint.path}")
+    end
+
     context 'with leading slash' do
       let(:path) { '/tomorrow' }
 

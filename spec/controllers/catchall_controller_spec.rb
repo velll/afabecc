@@ -28,4 +28,20 @@ RSpec.describe CatchallController do
       expect(response.status).to be(specific_endpoint.response.code)
     end
   end
+
+  context 'headers' do
+    let(:location_header) { 'example.com' }
+    let!(:endpoint) do
+      create_endpoint(verb: 'POST',
+                      path: 'something_cool',
+                      response: build_endpoint_response(code: 201,
+                                                        headers: { location: location_header }))
+    end
+
+    it 'adds specified headers' do
+      post :index, params: { path: endpoint.path }
+
+      expect(response.headers['location']).to eq(location_header)
+    end
+  end
 end
