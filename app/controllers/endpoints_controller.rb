@@ -17,8 +17,11 @@ class EndpointsController < ApplicationController
     endpoint = CreateEndpoint.call(verb: create_params[:verb],
                                    path: create_params[:path],
                                    response: create_params[:response])
-
-    render json: { data: EndpointSerializer.encode(endpoint) }, status: :created
+    if endpoint.valid?
+      render json: { data: EndpointSerializer.encode(endpoint) }, status: :created
+    else
+      render json: { errors: endpoint.errors }, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -28,7 +31,11 @@ class EndpointsController < ApplicationController
                                            path: create_params[:path],
                                            response: create_params[:response])
 
-    render json: { data: EndpointSerializer.encode(updated_endpoint) }, status: :ok
+    if updated_endpoint.valid?
+      render json: { data: EndpointSerializer.encode(updated_endpoint) }, status: :ok
+    else
+      render json: { errors: updated_endpoint.errors }, status: :unprocessable_entity
+    end
   end
 
   def destroy
