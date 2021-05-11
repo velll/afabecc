@@ -39,7 +39,8 @@ RSpec.describe EndpointsController do
   end
 
   describe 'POST create' do
-    let(:example_endpoint) { build_endpoint(verb: 'GET', path: 'hey') }
+    let(:path) { 'hey' }
+    let(:example_endpoint) { build_endpoint(verb: 'GET', path: path) }
     let(:create_params) { EndpointSerializer.encode(example_endpoint) }
 
     it 'creates a new endpoint' do
@@ -59,6 +60,18 @@ RSpec.describe EndpointsController do
 
       expect(new_endpoint.response.code).to eq(example_endpoint.response.code)
       expect(new_endpoint.response.body).to eq(example_endpoint.response.body)
+    end
+
+    context 'with leading slash' do
+      let(:path) { '/tomorrow' }
+
+      it 'new endpoint has normalized path' do
+        post :create, params: { data: create_params }
+
+        new_endpoint = Endpoint.find(JSON.parse(response.body)['data']['id'])
+
+        expect(new_endpoint.path).to eq('tomorrow')
+      end
     end
   end
 

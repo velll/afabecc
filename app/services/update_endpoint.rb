@@ -4,7 +4,7 @@ module UpdateEndpoint
   def call(endpoint:, verb:, path:, response:)
     Endpoint.transaction do
       endpoint.update(verb: verb,
-                      path: path)
+                      path: UrlUtils.normalize_path(path))
       endpoint.response.update(code: response[:code],
                                headers: response[:headers],
                                body: response[:body])

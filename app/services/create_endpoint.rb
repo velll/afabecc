@@ -3,7 +3,7 @@ module CreateEndpoint
 
   def call(verb:, path:, response:)
     Endpoint.create(verb: verb,
-                    path: path,
+                    path: UrlUtils.normalize_path(path),
                     response: EndpointResponse.new(code: response[:code],
                                                    headers: response[:headers],
                                                    body: response[:body]))

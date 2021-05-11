@@ -35,5 +35,6 @@ module Afabecc
     config.api_only = true
 
     config.autoload_paths << Rails.root.join('app/services')
+    config.autoload_paths << Rails.root.join('lib')
   end
 end
