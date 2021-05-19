@@ -8,7 +8,7 @@ class EndpointsController < ApplicationController
   end
 
   def show
-    endpoint = Endpoint.find(params[:id])
+    endpoint = Endpoint.includes(:response).find(params[:id])
 
     render json: { data: EndpointSerializer.encode(endpoint) }
   end
