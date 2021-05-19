@@ -1,6 +1,6 @@
 class EndpointsController < ApplicationController
   def index
-    endpoints = Endpoint.all
+    endpoints = Endpoint.all.includes(:response)
 
     render json: {
       data: endpoints.map { |endpoint| EndpointSerializer.encode(endpoint) }
