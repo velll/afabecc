@@ -20,7 +20,7 @@ $ rake db:migrate
 
 Startup
 ```bash
-$ rails c
+$ rails s
 ```
 
 # Development and test credentials
